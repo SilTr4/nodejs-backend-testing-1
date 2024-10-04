@@ -13,20 +13,18 @@ describe('PostsService', () => {
   });
 
   it('should add a new post', () => {
-    expect(postsService.find('1')).toEqual({
-      id: '1',
-      text: 'Some pre-existing post',
-      date: expect.any(String)
-    })
-    // реализуйте тест-кейс
+    expect(postsService.create(post)).toMatchObject({
+      id: expect.any(String),
+      text: post.text,
+      date: expect.any(String),
+    });
+    
   });
 
   it('should find a post', () => {
-    expect(postsService.find('1')).toEqual({
-      id: '1',
-      text: 'Some pre-existing post',
-      date: expect.any(String)
-    })
     // реализуйте тест-кейс
+    const existingPost = postsService.create(post);
+    const foundPost = postsService.find(existingPost.id);
+    expect(foundPost).toEqual(existingPost);
   });
 });
